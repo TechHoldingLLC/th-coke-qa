@@ -25,6 +25,41 @@ test.afterEach(async () => {
   await browser.close();
 });
 
+test("TC0001 - Verify that users are presented with a login page", async () => {
+  try {
+    // Navigate to the Admin Portal
+    await loginPage.navigate(config.adminUrl);
+
+    // Verify that the login Page is visible
+    const isVisible = await loginPage.isLoginPageVisible();
+    expect(isVisible).toBe(true);
+  } catch (error: any) {
+    console.error(`Test failed: ${error.message}`);
+    throw error;
+  }
+});
+
+test("TC0002 - Verify that users can enter their credentials", async () => {
+  try {
+    
+    await loginPage.navigate(config.adminUrl);
+
+    // Enter email and password into the LoginPage
+    await loginPage.enterEmail(config.email);
+    await loginPage.enterPassword(config.password);
+
+    // Validate  entered values are correct
+    const enteredEmail = await loginPage.getEnteredEmail();
+    const enteredPassword = await loginPage.getEnteredPassword();
+
+    expect(enteredEmail).toBe(config.email);
+    expect(enteredPassword).toBe(config.password);
+  } catch (error: any) {
+    console.error(`Test failed: ${error.message}`);
+    throw error;
+  }
+});
+
 test("TC0003 - Verify that admins who have appropriate access can access the system", async () => {
   try {
     // Navigate to the Admin Portal

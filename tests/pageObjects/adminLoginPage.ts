@@ -52,4 +52,22 @@ export class adminLoginPage {
   async isCokeLogoVisible(): Promise<boolean> {
     return await this.cokeLogo.isVisible();
   }
+
+  // Validate login Page is visible 
+  async isLoginPageVisible(): Promise<boolean> {
+    return await this.emailInput.isVisible() && await this.passwordInput.isVisible() && await this.loginButton.isVisible();
+  }
+
+  // Verify that the email and password inputs contain the correct values 
+  async getEnteredEmail(): Promise<string> {
+    return await this.emailInput.inputValue();
+  }
+
+  async getEnteredPassword(): Promise<string> {
+    return await this.passwordInput.inputValue();
+  }
 }
+
+
+
+
